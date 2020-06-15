@@ -1,0 +1,18 @@
+
+#INIT   
+
+BLOCK ola<_x> =>
+    ? <_x eqto 0>=>
+    return 1|
+    <= ?. =>
+    _y = ola<_x - 1> + 3|
+    show _y|
+    return _y|
+    <=
+<=
+
+show ola<3>|
+
+#END
+
+

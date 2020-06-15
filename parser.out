@@ -1,0 +1,2409 @@
+Created by PLY version 3.10 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> upper_statement
+Rule 1     upper_statement -> START_PROG middle_statement END_PROG
+Rule 2     function -> BLOCK TEXT ABRE_COLCH declarator upper_statement
+Rule 3     function_call -> TEXT ABRE_COLCH declarator
+Rule 4     declarator -> VAR FECHA_COLCH
+Rule 5     declarator -> FECHA_COLCH
+Rule 6     declarator -> VAR VIRG declarator
+Rule 7     declarator -> expression FECHA_COLCH
+Rule 8     declarator -> expression VIRG FECHA_COLCH
+Rule 9     upper_statement -> ABRE_STATE middle_statement FECHA_STATE
+Rule 10    middle_statement -> statement middle_statement
+Rule 11    middle_statement -> statement
+Rule 12    statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement
+Rule 13    statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement
+Rule 14    statement -> WHILE ABRE_COLCH expression FECHA_COLCH upper_statement
+Rule 15    statement -> upper_statement
+Rule 16    statement -> RETURN expression END_STATE
+Rule 17    statement -> END_STATE
+Rule 18    statement -> SHOW expression END_STATE
+Rule 19    statement -> VAR EQUAL expression END_STATE
+Rule 20    statement -> function
+Rule 21    statement -> function_call END_STATE
+Rule 22    expression -> relexpr
+Rule 23    relexpr -> expr
+Rule 24    relexpr -> relexpr LESS expr
+Rule 25    relexpr -> relexpr LESS_EQ expr
+Rule 26    relexpr -> relexpr GREATER expr
+Rule 27    relexpr -> relexpr GREATER_EQ expr
+Rule 28    relexpr -> relexpr EQTO expr
+Rule 29    expr -> term
+Rule 30    expr -> expr MAIS term
+Rule 31    expr -> expr MENOS term
+Rule 32    expr -> expr OR term
+Rule 33    expr -> expr CONCAT term
+Rule 34    term -> factor
+Rule 35    term -> term VEZES factor
+Rule 36    term -> term DIVIDE factor
+Rule 37    term -> term AND factor
+Rule 38    factor -> INTEGER
+Rule 39    factor -> MAIS factor
+Rule 40    factor -> MENOS factor
+Rule 41    factor -> NOT factor
+Rule 42    factor -> ABRE_PAREN relexpr FECHA_PAREN
+Rule 43    factor -> ASP TEXT ASP
+Rule 44    factor -> TRUE
+Rule 45    factor -> FALSE
+Rule 46    factor -> READ ABRE_COLCH FECHA_COLCH
+Rule 47    factor -> function_call
+
+Terminals, with rules where they appear
+
+ABRE_COLCH           : 2 3 12 13 14 46
+ABRE_PAREN           : 42
+ABRE_STATE           : 9
+AND                  : 37
+ASP                  : 43 43
+BLOCK                : 2
+CONCAT               : 33
+DIVIDE               : 36
+ELSE                 : 13
+END_PROG             : 1
+END_STATE            : 16 17 18 19 21
+EQTO                 : 28
+EQUAL                : 19
+FALSE                : 45
+FECHA_COLCH          : 4 5 7 8 12 13 14 46
+FECHA_PAREN          : 42
+FECHA_STATE          : 9
+GREATER              : 26
+GREATER_EQ           : 27
+IF                   : 12 13
+INTEGER              : 38
+LESS                 : 24
+LESS_EQ              : 25
+MAIS                 : 30 39
+MENOS                : 31 40
+NOT                  : 41
+OR                   : 32
+READ                 : 46
+RETURN               : 16
+SHOW                 : 18
+START_PROG           : 1
+TEXT                 : 2 3 43
+TRUE                 : 44
+VAR                  : 4 6 19
+VEZES                : 35
+VIRG                 : 6 8
+WHILE                : 14
+error                : 
+
+Nonterminals, with rules where they appear
+
+declarator           : 2 3 6
+expr                 : 23 24 25 26 27 28 30 31 32 33
+expression           : 7 8 12 13 14 16 18 19
+factor               : 34 35 36 37 39 40 41
+function             : 20
+function_call        : 21 47
+middle_statement     : 1 9 10
+relexpr              : 22 24 25 26 27 28 42
+statement            : 10 11
+term                 : 29 30 31 32 33 35 36 37
+upper_statement      : 2 12 13 13 14 15 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . upper_statement
+    (1) upper_statement -> . START_PROG middle_statement END_PROG
+    (9) upper_statement -> . ABRE_STATE middle_statement FECHA_STATE
+
+    START_PROG      shift and go to state 2
+    ABRE_STATE      shift and go to state 3
+
+    upper_statement                shift and go to state 1
+
+state 1
+
+    (0) S' -> upper_statement .
+
+
+
+state 2
+
+    (1) upper_statement -> START_PROG . middle_statement END_PROG
+    (10) middle_statement -> . statement middle_statement
+    (11) middle_statement -> . statement
+    (12) statement -> . IF ABRE_COLCH expression FECHA_COLCH upper_statement
+    (13) statement -> . IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement
+    (14) statement -> . WHILE ABRE_COLCH expression FECHA_COLCH upper_statement
+    (15) statement -> . upper_statement
+    (16) statement -> . RETURN expression END_STATE
+    (17) statement -> . END_STATE
+    (18) statement -> . SHOW expression END_STATE
+    (19) statement -> . VAR EQUAL expression END_STATE
+    (20) statement -> . function
+    (21) statement -> . function_call END_STATE
+    (1) upper_statement -> . START_PROG middle_statement END_PROG
+    (9) upper_statement -> . ABRE_STATE middle_statement FECHA_STATE
+    (2) function -> . BLOCK TEXT ABRE_COLCH declarator upper_statement
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    IF              shift and go to state 6
+    WHILE           shift and go to state 8
+    RETURN          shift and go to state 9
+    END_STATE       shift and go to state 10
+    SHOW            shift and go to state 11
+    VAR             shift and go to state 12
+    START_PROG      shift and go to state 2
+    ABRE_STATE      shift and go to state 3
+    BLOCK           shift and go to state 15
+    TEXT            shift and go to state 16
+
+    middle_statement               shift and go to state 4
+    statement                      shift and go to state 5
+    upper_statement                shift and go to state 7
+    function                       shift and go to state 13
+    function_call                  shift and go to state 14
+
+state 3
+
+    (9) upper_statement -> ABRE_STATE . middle_statement FECHA_STATE
+    (10) middle_statement -> . statement middle_statement
+    (11) middle_statement -> . statement
+    (12) statement -> . IF ABRE_COLCH expression FECHA_COLCH upper_statement
+    (13) statement -> . IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement
+    (14) statement -> . WHILE ABRE_COLCH expression FECHA_COLCH upper_statement
+    (15) statement -> . upper_statement
+    (16) statement -> . RETURN expression END_STATE
+    (17) statement -> . END_STATE
+    (18) statement -> . SHOW expression END_STATE
+    (19) statement -> . VAR EQUAL expression END_STATE
+    (20) statement -> . function
+    (21) statement -> . function_call END_STATE
+    (1) upper_statement -> . START_PROG middle_statement END_PROG
+    (9) upper_statement -> . ABRE_STATE middle_statement FECHA_STATE
+    (2) function -> . BLOCK TEXT ABRE_COLCH declarator upper_statement
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    IF              shift and go to state 6
+    WHILE           shift and go to state 8
+    RETURN          shift and go to state 9
+    END_STATE       shift and go to state 10
+    SHOW            shift and go to state 11
+    VAR             shift and go to state 12
+    START_PROG      shift and go to state 2
+    ABRE_STATE      shift and go to state 3
+    BLOCK           shift and go to state 15
+    TEXT            shift and go to state 16
+
+    middle_statement               shift and go to state 17
+    statement                      shift and go to state 5
+    upper_statement                shift and go to state 7
+    function                       shift and go to state 13
+    function_call                  shift and go to state 14
+
+state 4
+
+    (1) upper_statement -> START_PROG middle_statement . END_PROG
+
+    END_PROG        shift and go to state 18
+
+
+state 5
+
+    (10) middle_statement -> statement . middle_statement
+    (11) middle_statement -> statement .
+    (10) middle_statement -> . statement middle_statement
+    (11) middle_statement -> . statement
+    (12) statement -> . IF ABRE_COLCH expression FECHA_COLCH upper_statement
+    (13) statement -> . IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement
+    (14) statement -> . WHILE ABRE_COLCH expression FECHA_COLCH upper_statement
+    (15) statement -> . upper_statement
+    (16) statement -> . RETURN expression END_STATE
+    (17) statement -> . END_STATE
+    (18) statement -> . SHOW expression END_STATE
+    (19) statement -> . VAR EQUAL expression END_STATE
+    (20) statement -> . function
+    (21) statement -> . function_call END_STATE
+    (1) upper_statement -> . START_PROG middle_statement END_PROG
+    (9) upper_statement -> . ABRE_STATE middle_statement FECHA_STATE
+    (2) function -> . BLOCK TEXT ABRE_COLCH declarator upper_statement
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    END_PROG        reduce using rule 11 (middle_statement -> statement .)
+    FECHA_STATE     reduce using rule 11 (middle_statement -> statement .)
+    IF              shift and go to state 6
+    WHILE           shift and go to state 8
+    RETURN          shift and go to state 9
+    END_STATE       shift and go to state 10
+    SHOW            shift and go to state 11
+    VAR             shift and go to state 12
+    START_PROG      shift and go to state 2
+    ABRE_STATE      shift and go to state 3
+    BLOCK           shift and go to state 15
+    TEXT            shift and go to state 16
+
+    statement                      shift and go to state 5
+    middle_statement               shift and go to state 19
+    upper_statement                shift and go to state 7
+    function                       shift and go to state 13
+    function_call                  shift and go to state 14
+
+state 6
+
+    (12) statement -> IF . ABRE_COLCH expression FECHA_COLCH upper_statement
+    (13) statement -> IF . ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement
+
+    ABRE_COLCH      shift and go to state 20
+
+
+state 7
+
+    (15) statement -> upper_statement .
+
+    IF              reduce using rule 15 (statement -> upper_statement .)
+    WHILE           reduce using rule 15 (statement -> upper_statement .)
+    RETURN          reduce using rule 15 (statement -> upper_statement .)
+    END_STATE       reduce using rule 15 (statement -> upper_statement .)
+    SHOW            reduce using rule 15 (statement -> upper_statement .)
+    VAR             reduce using rule 15 (statement -> upper_statement .)
+    START_PROG      reduce using rule 15 (statement -> upper_statement .)
+    ABRE_STATE      reduce using rule 15 (statement -> upper_statement .)
+    BLOCK           reduce using rule 15 (statement -> upper_statement .)
+    TEXT            reduce using rule 15 (statement -> upper_statement .)
+    END_PROG        reduce using rule 15 (statement -> upper_statement .)
+    FECHA_STATE     reduce using rule 15 (statement -> upper_statement .)
+
+
+state 8
+
+    (14) statement -> WHILE . ABRE_COLCH expression FECHA_COLCH upper_statement
+
+    ABRE_COLCH      shift and go to state 21
+
+
+state 9
+
+    (16) statement -> RETURN . expression END_STATE
+    (22) expression -> . relexpr
+    (23) relexpr -> . expr
+    (24) relexpr -> . relexpr LESS expr
+    (25) relexpr -> . relexpr LESS_EQ expr
+    (26) relexpr -> . relexpr GREATER expr
+    (27) relexpr -> . relexpr GREATER_EQ expr
+    (28) relexpr -> . relexpr EQTO expr
+    (29) expr -> . term
+    (30) expr -> . expr MAIS term
+    (31) expr -> . expr MENOS term
+    (32) expr -> . expr OR term
+    (33) expr -> . expr CONCAT term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    expression                     shift and go to state 22
+    relexpr                        shift and go to state 23
+    expr                           shift and go to state 24
+    term                           shift and go to state 25
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 10
+
+    (17) statement -> END_STATE .
+
+    IF              reduce using rule 17 (statement -> END_STATE .)
+    WHILE           reduce using rule 17 (statement -> END_STATE .)
+    RETURN          reduce using rule 17 (statement -> END_STATE .)
+    END_STATE       reduce using rule 17 (statement -> END_STATE .)
+    SHOW            reduce using rule 17 (statement -> END_STATE .)
+    VAR             reduce using rule 17 (statement -> END_STATE .)
+    START_PROG      reduce using rule 17 (statement -> END_STATE .)
+    ABRE_STATE      reduce using rule 17 (statement -> END_STATE .)
+    BLOCK           reduce using rule 17 (statement -> END_STATE .)
+    TEXT            reduce using rule 17 (statement -> END_STATE .)
+    END_PROG        reduce using rule 17 (statement -> END_STATE .)
+    FECHA_STATE     reduce using rule 17 (statement -> END_STATE .)
+
+
+state 11
+
+    (18) statement -> SHOW . expression END_STATE
+    (22) expression -> . relexpr
+    (23) relexpr -> . expr
+    (24) relexpr -> . relexpr LESS expr
+    (25) relexpr -> . relexpr LESS_EQ expr
+    (26) relexpr -> . relexpr GREATER expr
+    (27) relexpr -> . relexpr GREATER_EQ expr
+    (28) relexpr -> . relexpr EQTO expr
+    (29) expr -> . term
+    (30) expr -> . expr MAIS term
+    (31) expr -> . expr MENOS term
+    (32) expr -> . expr OR term
+    (33) expr -> . expr CONCAT term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    expression                     shift and go to state 37
+    relexpr                        shift and go to state 23
+    expr                           shift and go to state 24
+    term                           shift and go to state 25
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 12
+
+    (19) statement -> VAR . EQUAL expression END_STATE
+
+    EQUAL           shift and go to state 38
+
+
+state 13
+
+    (20) statement -> function .
+
+    IF              reduce using rule 20 (statement -> function .)
+    WHILE           reduce using rule 20 (statement -> function .)
+    RETURN          reduce using rule 20 (statement -> function .)
+    END_STATE       reduce using rule 20 (statement -> function .)
+    SHOW            reduce using rule 20 (statement -> function .)
+    VAR             reduce using rule 20 (statement -> function .)
+    START_PROG      reduce using rule 20 (statement -> function .)
+    ABRE_STATE      reduce using rule 20 (statement -> function .)
+    BLOCK           reduce using rule 20 (statement -> function .)
+    TEXT            reduce using rule 20 (statement -> function .)
+    END_PROG        reduce using rule 20 (statement -> function .)
+    FECHA_STATE     reduce using rule 20 (statement -> function .)
+
+
+state 14
+
+    (21) statement -> function_call . END_STATE
+
+    END_STATE       shift and go to state 39
+
+
+state 15
+
+    (2) function -> BLOCK . TEXT ABRE_COLCH declarator upper_statement
+
+    TEXT            shift and go to state 40
+
+
+state 16
+
+    (3) function_call -> TEXT . ABRE_COLCH declarator
+
+    ABRE_COLCH      shift and go to state 41
+
+
+state 17
+
+    (9) upper_statement -> ABRE_STATE middle_statement . FECHA_STATE
+
+    FECHA_STATE     shift and go to state 42
+
+
+state 18
+
+    (1) upper_statement -> START_PROG middle_statement END_PROG .
+
+    $end            reduce using rule 1 (upper_statement -> START_PROG middle_statement END_PROG .)
+    IF              reduce using rule 1 (upper_statement -> START_PROG middle_statement END_PROG .)
+    WHILE           reduce using rule 1 (upper_statement -> START_PROG middle_statement END_PROG .)
+    RETURN          reduce using rule 1 (upper_statement -> START_PROG middle_statement END_PROG .)
+    END_STATE       reduce using rule 1 (upper_statement -> START_PROG middle_statement END_PROG .)
+    SHOW            reduce using rule 1 (upper_statement -> START_PROG middle_statement END_PROG .)
+    VAR             reduce using rule 1 (upper_statement -> START_PROG middle_statement END_PROG .)
+    START_PROG      reduce using rule 1 (upper_statement -> START_PROG middle_statement END_PROG .)
+    ABRE_STATE      reduce using rule 1 (upper_statement -> START_PROG middle_statement END_PROG .)
+    BLOCK           reduce using rule 1 (upper_statement -> START_PROG middle_statement END_PROG .)
+    TEXT            reduce using rule 1 (upper_statement -> START_PROG middle_statement END_PROG .)
+    END_PROG        reduce using rule 1 (upper_statement -> START_PROG middle_statement END_PROG .)
+    FECHA_STATE     reduce using rule 1 (upper_statement -> START_PROG middle_statement END_PROG .)
+    ELSE            reduce using rule 1 (upper_statement -> START_PROG middle_statement END_PROG .)
+
+
+state 19
+
+    (10) middle_statement -> statement middle_statement .
+
+    END_PROG        reduce using rule 10 (middle_statement -> statement middle_statement .)
+    FECHA_STATE     reduce using rule 10 (middle_statement -> statement middle_statement .)
+
+
+state 20
+
+    (12) statement -> IF ABRE_COLCH . expression FECHA_COLCH upper_statement
+    (13) statement -> IF ABRE_COLCH . expression FECHA_COLCH upper_statement ELSE upper_statement
+    (22) expression -> . relexpr
+    (23) relexpr -> . expr
+    (24) relexpr -> . relexpr LESS expr
+    (25) relexpr -> . relexpr LESS_EQ expr
+    (26) relexpr -> . relexpr GREATER expr
+    (27) relexpr -> . relexpr GREATER_EQ expr
+    (28) relexpr -> . relexpr EQTO expr
+    (29) expr -> . term
+    (30) expr -> . expr MAIS term
+    (31) expr -> . expr MENOS term
+    (32) expr -> . expr OR term
+    (33) expr -> . expr CONCAT term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    expression                     shift and go to state 43
+    relexpr                        shift and go to state 23
+    expr                           shift and go to state 24
+    term                           shift and go to state 25
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 21
+
+    (14) statement -> WHILE ABRE_COLCH . expression FECHA_COLCH upper_statement
+    (22) expression -> . relexpr
+    (23) relexpr -> . expr
+    (24) relexpr -> . relexpr LESS expr
+    (25) relexpr -> . relexpr LESS_EQ expr
+    (26) relexpr -> . relexpr GREATER expr
+    (27) relexpr -> . relexpr GREATER_EQ expr
+    (28) relexpr -> . relexpr EQTO expr
+    (29) expr -> . term
+    (30) expr -> . expr MAIS term
+    (31) expr -> . expr MENOS term
+    (32) expr -> . expr OR term
+    (33) expr -> . expr CONCAT term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    expression                     shift and go to state 44
+    relexpr                        shift and go to state 23
+    expr                           shift and go to state 24
+    term                           shift and go to state 25
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 22
+
+    (16) statement -> RETURN expression . END_STATE
+
+    END_STATE       shift and go to state 45
+
+
+state 23
+
+    (22) expression -> relexpr .
+    (24) relexpr -> relexpr . LESS expr
+    (25) relexpr -> relexpr . LESS_EQ expr
+    (26) relexpr -> relexpr . GREATER expr
+    (27) relexpr -> relexpr . GREATER_EQ expr
+    (28) relexpr -> relexpr . EQTO expr
+
+    END_STATE       reduce using rule 22 (expression -> relexpr .)
+    FECHA_COLCH     reduce using rule 22 (expression -> relexpr .)
+    VIRG            reduce using rule 22 (expression -> relexpr .)
+    LESS            shift and go to state 46
+    LESS_EQ         shift and go to state 47
+    GREATER         shift and go to state 48
+    GREATER_EQ      shift and go to state 49
+    EQTO            shift and go to state 50
+
+
+state 24
+
+    (23) relexpr -> expr .
+    (30) expr -> expr . MAIS term
+    (31) expr -> expr . MENOS term
+    (32) expr -> expr . OR term
+    (33) expr -> expr . CONCAT term
+
+    LESS            reduce using rule 23 (relexpr -> expr .)
+    LESS_EQ         reduce using rule 23 (relexpr -> expr .)
+    GREATER         reduce using rule 23 (relexpr -> expr .)
+    GREATER_EQ      reduce using rule 23 (relexpr -> expr .)
+    EQTO            reduce using rule 23 (relexpr -> expr .)
+    END_STATE       reduce using rule 23 (relexpr -> expr .)
+    FECHA_COLCH     reduce using rule 23 (relexpr -> expr .)
+    FECHA_PAREN     reduce using rule 23 (relexpr -> expr .)
+    VIRG            reduce using rule 23 (relexpr -> expr .)
+    MAIS            shift and go to state 51
+    MENOS           shift and go to state 52
+    OR              shift and go to state 53
+    CONCAT          shift and go to state 54
+
+
+state 25
+
+    (29) expr -> term .
+    (35) term -> term . VEZES factor
+    (36) term -> term . DIVIDE factor
+    (37) term -> term . AND factor
+
+    MAIS            reduce using rule 29 (expr -> term .)
+    MENOS           reduce using rule 29 (expr -> term .)
+    OR              reduce using rule 29 (expr -> term .)
+    CONCAT          reduce using rule 29 (expr -> term .)
+    LESS            reduce using rule 29 (expr -> term .)
+    LESS_EQ         reduce using rule 29 (expr -> term .)
+    GREATER         reduce using rule 29 (expr -> term .)
+    GREATER_EQ      reduce using rule 29 (expr -> term .)
+    EQTO            reduce using rule 29 (expr -> term .)
+    END_STATE       reduce using rule 29 (expr -> term .)
+    FECHA_COLCH     reduce using rule 29 (expr -> term .)
+    FECHA_PAREN     reduce using rule 29 (expr -> term .)
+    VIRG            reduce using rule 29 (expr -> term .)
+    VEZES           shift and go to state 55
+    DIVIDE          shift and go to state 56
+    AND             shift and go to state 57
+
+
+state 26
+
+    (39) factor -> MAIS . factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    factor                         shift and go to state 58
+    function_call                  shift and go to state 36
+
+state 27
+
+    (40) factor -> MENOS . factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    factor                         shift and go to state 59
+    function_call                  shift and go to state 36
+
+state 28
+
+    (34) term -> factor .
+
+    VEZES           reduce using rule 34 (term -> factor .)
+    DIVIDE          reduce using rule 34 (term -> factor .)
+    AND             reduce using rule 34 (term -> factor .)
+    MAIS            reduce using rule 34 (term -> factor .)
+    MENOS           reduce using rule 34 (term -> factor .)
+    OR              reduce using rule 34 (term -> factor .)
+    CONCAT          reduce using rule 34 (term -> factor .)
+    LESS            reduce using rule 34 (term -> factor .)
+    LESS_EQ         reduce using rule 34 (term -> factor .)
+    GREATER         reduce using rule 34 (term -> factor .)
+    GREATER_EQ      reduce using rule 34 (term -> factor .)
+    EQTO            reduce using rule 34 (term -> factor .)
+    END_STATE       reduce using rule 34 (term -> factor .)
+    FECHA_COLCH     reduce using rule 34 (term -> factor .)
+    FECHA_PAREN     reduce using rule 34 (term -> factor .)
+    VIRG            reduce using rule 34 (term -> factor .)
+
+
+state 29
+
+    (38) factor -> INTEGER .
+
+    VEZES           reduce using rule 38 (factor -> INTEGER .)
+    DIVIDE          reduce using rule 38 (factor -> INTEGER .)
+    AND             reduce using rule 38 (factor -> INTEGER .)
+    MAIS            reduce using rule 38 (factor -> INTEGER .)
+    MENOS           reduce using rule 38 (factor -> INTEGER .)
+    OR              reduce using rule 38 (factor -> INTEGER .)
+    CONCAT          reduce using rule 38 (factor -> INTEGER .)
+    LESS            reduce using rule 38 (factor -> INTEGER .)
+    LESS_EQ         reduce using rule 38 (factor -> INTEGER .)
+    GREATER         reduce using rule 38 (factor -> INTEGER .)
+    GREATER_EQ      reduce using rule 38 (factor -> INTEGER .)
+    EQTO            reduce using rule 38 (factor -> INTEGER .)
+    END_STATE       reduce using rule 38 (factor -> INTEGER .)
+    FECHA_COLCH     reduce using rule 38 (factor -> INTEGER .)
+    FECHA_PAREN     reduce using rule 38 (factor -> INTEGER .)
+    VIRG            reduce using rule 38 (factor -> INTEGER .)
+
+
+state 30
+
+    (41) factor -> NOT . factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    factor                         shift and go to state 60
+    function_call                  shift and go to state 36
+
+state 31
+
+    (42) factor -> ABRE_PAREN . relexpr FECHA_PAREN
+    (23) relexpr -> . expr
+    (24) relexpr -> . relexpr LESS expr
+    (25) relexpr -> . relexpr LESS_EQ expr
+    (26) relexpr -> . relexpr GREATER expr
+    (27) relexpr -> . relexpr GREATER_EQ expr
+    (28) relexpr -> . relexpr EQTO expr
+    (29) expr -> . term
+    (30) expr -> . expr MAIS term
+    (31) expr -> . expr MENOS term
+    (32) expr -> . expr OR term
+    (33) expr -> . expr CONCAT term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    relexpr                        shift and go to state 61
+    expr                           shift and go to state 24
+    term                           shift and go to state 25
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 32
+
+    (43) factor -> ASP . TEXT ASP
+
+    TEXT            shift and go to state 62
+
+
+state 33
+
+    (44) factor -> TRUE .
+
+    VEZES           reduce using rule 44 (factor -> TRUE .)
+    DIVIDE          reduce using rule 44 (factor -> TRUE .)
+    AND             reduce using rule 44 (factor -> TRUE .)
+    MAIS            reduce using rule 44 (factor -> TRUE .)
+    MENOS           reduce using rule 44 (factor -> TRUE .)
+    OR              reduce using rule 44 (factor -> TRUE .)
+    CONCAT          reduce using rule 44 (factor -> TRUE .)
+    LESS            reduce using rule 44 (factor -> TRUE .)
+    LESS_EQ         reduce using rule 44 (factor -> TRUE .)
+    GREATER         reduce using rule 44 (factor -> TRUE .)
+    GREATER_EQ      reduce using rule 44 (factor -> TRUE .)
+    EQTO            reduce using rule 44 (factor -> TRUE .)
+    END_STATE       reduce using rule 44 (factor -> TRUE .)
+    FECHA_COLCH     reduce using rule 44 (factor -> TRUE .)
+    FECHA_PAREN     reduce using rule 44 (factor -> TRUE .)
+    VIRG            reduce using rule 44 (factor -> TRUE .)
+
+
+state 34
+
+    (45) factor -> FALSE .
+
+    VEZES           reduce using rule 45 (factor -> FALSE .)
+    DIVIDE          reduce using rule 45 (factor -> FALSE .)
+    AND             reduce using rule 45 (factor -> FALSE .)
+    MAIS            reduce using rule 45 (factor -> FALSE .)
+    MENOS           reduce using rule 45 (factor -> FALSE .)
+    OR              reduce using rule 45 (factor -> FALSE .)
+    CONCAT          reduce using rule 45 (factor -> FALSE .)
+    LESS            reduce using rule 45 (factor -> FALSE .)
+    LESS_EQ         reduce using rule 45 (factor -> FALSE .)
+    GREATER         reduce using rule 45 (factor -> FALSE .)
+    GREATER_EQ      reduce using rule 45 (factor -> FALSE .)
+    EQTO            reduce using rule 45 (factor -> FALSE .)
+    END_STATE       reduce using rule 45 (factor -> FALSE .)
+    FECHA_COLCH     reduce using rule 45 (factor -> FALSE .)
+    FECHA_PAREN     reduce using rule 45 (factor -> FALSE .)
+    VIRG            reduce using rule 45 (factor -> FALSE .)
+
+
+state 35
+
+    (46) factor -> READ . ABRE_COLCH FECHA_COLCH
+
+    ABRE_COLCH      shift and go to state 63
+
+
+state 36
+
+    (47) factor -> function_call .
+
+    VEZES           reduce using rule 47 (factor -> function_call .)
+    DIVIDE          reduce using rule 47 (factor -> function_call .)
+    AND             reduce using rule 47 (factor -> function_call .)
+    MAIS            reduce using rule 47 (factor -> function_call .)
+    MENOS           reduce using rule 47 (factor -> function_call .)
+    OR              reduce using rule 47 (factor -> function_call .)
+    CONCAT          reduce using rule 47 (factor -> function_call .)
+    LESS            reduce using rule 47 (factor -> function_call .)
+    LESS_EQ         reduce using rule 47 (factor -> function_call .)
+    GREATER         reduce using rule 47 (factor -> function_call .)
+    GREATER_EQ      reduce using rule 47 (factor -> function_call .)
+    EQTO            reduce using rule 47 (factor -> function_call .)
+    END_STATE       reduce using rule 47 (factor -> function_call .)
+    FECHA_COLCH     reduce using rule 47 (factor -> function_call .)
+    FECHA_PAREN     reduce using rule 47 (factor -> function_call .)
+    VIRG            reduce using rule 47 (factor -> function_call .)
+
+
+state 37
+
+    (18) statement -> SHOW expression . END_STATE
+
+    END_STATE       shift and go to state 64
+
+
+state 38
+
+    (19) statement -> VAR EQUAL . expression END_STATE
+    (22) expression -> . relexpr
+    (23) relexpr -> . expr
+    (24) relexpr -> . relexpr LESS expr
+    (25) relexpr -> . relexpr LESS_EQ expr
+    (26) relexpr -> . relexpr GREATER expr
+    (27) relexpr -> . relexpr GREATER_EQ expr
+    (28) relexpr -> . relexpr EQTO expr
+    (29) expr -> . term
+    (30) expr -> . expr MAIS term
+    (31) expr -> . expr MENOS term
+    (32) expr -> . expr OR term
+    (33) expr -> . expr CONCAT term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    expression                     shift and go to state 65
+    relexpr                        shift and go to state 23
+    expr                           shift and go to state 24
+    term                           shift and go to state 25
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 39
+
+    (21) statement -> function_call END_STATE .
+
+    IF              reduce using rule 21 (statement -> function_call END_STATE .)
+    WHILE           reduce using rule 21 (statement -> function_call END_STATE .)
+    RETURN          reduce using rule 21 (statement -> function_call END_STATE .)
+    END_STATE       reduce using rule 21 (statement -> function_call END_STATE .)
+    SHOW            reduce using rule 21 (statement -> function_call END_STATE .)
+    VAR             reduce using rule 21 (statement -> function_call END_STATE .)
+    START_PROG      reduce using rule 21 (statement -> function_call END_STATE .)
+    ABRE_STATE      reduce using rule 21 (statement -> function_call END_STATE .)
+    BLOCK           reduce using rule 21 (statement -> function_call END_STATE .)
+    TEXT            reduce using rule 21 (statement -> function_call END_STATE .)
+    END_PROG        reduce using rule 21 (statement -> function_call END_STATE .)
+    FECHA_STATE     reduce using rule 21 (statement -> function_call END_STATE .)
+
+
+state 40
+
+    (2) function -> BLOCK TEXT . ABRE_COLCH declarator upper_statement
+
+    ABRE_COLCH      shift and go to state 66
+
+
+state 41
+
+    (3) function_call -> TEXT ABRE_COLCH . declarator
+    (4) declarator -> . VAR FECHA_COLCH
+    (5) declarator -> . FECHA_COLCH
+    (6) declarator -> . VAR VIRG declarator
+    (7) declarator -> . expression FECHA_COLCH
+    (8) declarator -> . expression VIRG FECHA_COLCH
+    (22) expression -> . relexpr
+    (23) relexpr -> . expr
+    (24) relexpr -> . relexpr LESS expr
+    (25) relexpr -> . relexpr LESS_EQ expr
+    (26) relexpr -> . relexpr GREATER expr
+    (27) relexpr -> . relexpr GREATER_EQ expr
+    (28) relexpr -> . relexpr EQTO expr
+    (29) expr -> . term
+    (30) expr -> . expr MAIS term
+    (31) expr -> . expr MENOS term
+    (32) expr -> . expr OR term
+    (33) expr -> . expr CONCAT term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    VAR             shift and go to state 68
+    FECHA_COLCH     shift and go to state 69
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    declarator                     shift and go to state 67
+    expression                     shift and go to state 70
+    relexpr                        shift and go to state 23
+    expr                           shift and go to state 24
+    term                           shift and go to state 25
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 42
+
+    (9) upper_statement -> ABRE_STATE middle_statement FECHA_STATE .
+
+    $end            reduce using rule 9 (upper_statement -> ABRE_STATE middle_statement FECHA_STATE .)
+    IF              reduce using rule 9 (upper_statement -> ABRE_STATE middle_statement FECHA_STATE .)
+    WHILE           reduce using rule 9 (upper_statement -> ABRE_STATE middle_statement FECHA_STATE .)
+    RETURN          reduce using rule 9 (upper_statement -> ABRE_STATE middle_statement FECHA_STATE .)
+    END_STATE       reduce using rule 9 (upper_statement -> ABRE_STATE middle_statement FECHA_STATE .)
+    SHOW            reduce using rule 9 (upper_statement -> ABRE_STATE middle_statement FECHA_STATE .)
+    VAR             reduce using rule 9 (upper_statement -> ABRE_STATE middle_statement FECHA_STATE .)
+    START_PROG      reduce using rule 9 (upper_statement -> ABRE_STATE middle_statement FECHA_STATE .)
+    ABRE_STATE      reduce using rule 9 (upper_statement -> ABRE_STATE middle_statement FECHA_STATE .)
+    BLOCK           reduce using rule 9 (upper_statement -> ABRE_STATE middle_statement FECHA_STATE .)
+    TEXT            reduce using rule 9 (upper_statement -> ABRE_STATE middle_statement FECHA_STATE .)
+    END_PROG        reduce using rule 9 (upper_statement -> ABRE_STATE middle_statement FECHA_STATE .)
+    FECHA_STATE     reduce using rule 9 (upper_statement -> ABRE_STATE middle_statement FECHA_STATE .)
+    ELSE            reduce using rule 9 (upper_statement -> ABRE_STATE middle_statement FECHA_STATE .)
+
+
+state 43
+
+    (12) statement -> IF ABRE_COLCH expression . FECHA_COLCH upper_statement
+    (13) statement -> IF ABRE_COLCH expression . FECHA_COLCH upper_statement ELSE upper_statement
+
+    FECHA_COLCH     shift and go to state 71
+
+
+state 44
+
+    (14) statement -> WHILE ABRE_COLCH expression . FECHA_COLCH upper_statement
+
+    FECHA_COLCH     shift and go to state 72
+
+
+state 45
+
+    (16) statement -> RETURN expression END_STATE .
+
+    IF              reduce using rule 16 (statement -> RETURN expression END_STATE .)
+    WHILE           reduce using rule 16 (statement -> RETURN expression END_STATE .)
+    RETURN          reduce using rule 16 (statement -> RETURN expression END_STATE .)
+    END_STATE       reduce using rule 16 (statement -> RETURN expression END_STATE .)
+    SHOW            reduce using rule 16 (statement -> RETURN expression END_STATE .)
+    VAR             reduce using rule 16 (statement -> RETURN expression END_STATE .)
+    START_PROG      reduce using rule 16 (statement -> RETURN expression END_STATE .)
+    ABRE_STATE      reduce using rule 16 (statement -> RETURN expression END_STATE .)
+    BLOCK           reduce using rule 16 (statement -> RETURN expression END_STATE .)
+    TEXT            reduce using rule 16 (statement -> RETURN expression END_STATE .)
+    END_PROG        reduce using rule 16 (statement -> RETURN expression END_STATE .)
+    FECHA_STATE     reduce using rule 16 (statement -> RETURN expression END_STATE .)
+
+
+state 46
+
+    (24) relexpr -> relexpr LESS . expr
+    (29) expr -> . term
+    (30) expr -> . expr MAIS term
+    (31) expr -> . expr MENOS term
+    (32) expr -> . expr OR term
+    (33) expr -> . expr CONCAT term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    expr                           shift and go to state 73
+    term                           shift and go to state 25
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 47
+
+    (25) relexpr -> relexpr LESS_EQ . expr
+    (29) expr -> . term
+    (30) expr -> . expr MAIS term
+    (31) expr -> . expr MENOS term
+    (32) expr -> . expr OR term
+    (33) expr -> . expr CONCAT term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    expr                           shift and go to state 74
+    term                           shift and go to state 25
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 48
+
+    (26) relexpr -> relexpr GREATER . expr
+    (29) expr -> . term
+    (30) expr -> . expr MAIS term
+    (31) expr -> . expr MENOS term
+    (32) expr -> . expr OR term
+    (33) expr -> . expr CONCAT term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    expr                           shift and go to state 75
+    term                           shift and go to state 25
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 49
+
+    (27) relexpr -> relexpr GREATER_EQ . expr
+    (29) expr -> . term
+    (30) expr -> . expr MAIS term
+    (31) expr -> . expr MENOS term
+    (32) expr -> . expr OR term
+    (33) expr -> . expr CONCAT term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    expr                           shift and go to state 76
+    term                           shift and go to state 25
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 50
+
+    (28) relexpr -> relexpr EQTO . expr
+    (29) expr -> . term
+    (30) expr -> . expr MAIS term
+    (31) expr -> . expr MENOS term
+    (32) expr -> . expr OR term
+    (33) expr -> . expr CONCAT term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    expr                           shift and go to state 77
+    term                           shift and go to state 25
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 51
+
+    (30) expr -> expr MAIS . term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    term                           shift and go to state 78
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 52
+
+    (31) expr -> expr MENOS . term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    term                           shift and go to state 79
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 53
+
+    (32) expr -> expr OR . term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    term                           shift and go to state 80
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 54
+
+    (33) expr -> expr CONCAT . term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    term                           shift and go to state 81
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 55
+
+    (35) term -> term VEZES . factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    factor                         shift and go to state 82
+    function_call                  shift and go to state 36
+
+state 56
+
+    (36) term -> term DIVIDE . factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    factor                         shift and go to state 83
+    function_call                  shift and go to state 36
+
+state 57
+
+    (37) term -> term AND . factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    factor                         shift and go to state 84
+    function_call                  shift and go to state 36
+
+state 58
+
+    (39) factor -> MAIS factor .
+
+    VEZES           reduce using rule 39 (factor -> MAIS factor .)
+    DIVIDE          reduce using rule 39 (factor -> MAIS factor .)
+    AND             reduce using rule 39 (factor -> MAIS factor .)
+    MAIS            reduce using rule 39 (factor -> MAIS factor .)
+    MENOS           reduce using rule 39 (factor -> MAIS factor .)
+    OR              reduce using rule 39 (factor -> MAIS factor .)
+    CONCAT          reduce using rule 39 (factor -> MAIS factor .)
+    LESS            reduce using rule 39 (factor -> MAIS factor .)
+    LESS_EQ         reduce using rule 39 (factor -> MAIS factor .)
+    GREATER         reduce using rule 39 (factor -> MAIS factor .)
+    GREATER_EQ      reduce using rule 39 (factor -> MAIS factor .)
+    EQTO            reduce using rule 39 (factor -> MAIS factor .)
+    END_STATE       reduce using rule 39 (factor -> MAIS factor .)
+    FECHA_COLCH     reduce using rule 39 (factor -> MAIS factor .)
+    FECHA_PAREN     reduce using rule 39 (factor -> MAIS factor .)
+    VIRG            reduce using rule 39 (factor -> MAIS factor .)
+
+
+state 59
+
+    (40) factor -> MENOS factor .
+
+    VEZES           reduce using rule 40 (factor -> MENOS factor .)
+    DIVIDE          reduce using rule 40 (factor -> MENOS factor .)
+    AND             reduce using rule 40 (factor -> MENOS factor .)
+    MAIS            reduce using rule 40 (factor -> MENOS factor .)
+    MENOS           reduce using rule 40 (factor -> MENOS factor .)
+    OR              reduce using rule 40 (factor -> MENOS factor .)
+    CONCAT          reduce using rule 40 (factor -> MENOS factor .)
+    LESS            reduce using rule 40 (factor -> MENOS factor .)
+    LESS_EQ         reduce using rule 40 (factor -> MENOS factor .)
+    GREATER         reduce using rule 40 (factor -> MENOS factor .)
+    GREATER_EQ      reduce using rule 40 (factor -> MENOS factor .)
+    EQTO            reduce using rule 40 (factor -> MENOS factor .)
+    END_STATE       reduce using rule 40 (factor -> MENOS factor .)
+    FECHA_COLCH     reduce using rule 40 (factor -> MENOS factor .)
+    FECHA_PAREN     reduce using rule 40 (factor -> MENOS factor .)
+    VIRG            reduce using rule 40 (factor -> MENOS factor .)
+
+
+state 60
+
+    (41) factor -> NOT factor .
+
+    VEZES           reduce using rule 41 (factor -> NOT factor .)
+    DIVIDE          reduce using rule 41 (factor -> NOT factor .)
+    AND             reduce using rule 41 (factor -> NOT factor .)
+    MAIS            reduce using rule 41 (factor -> NOT factor .)
+    MENOS           reduce using rule 41 (factor -> NOT factor .)
+    OR              reduce using rule 41 (factor -> NOT factor .)
+    CONCAT          reduce using rule 41 (factor -> NOT factor .)
+    LESS            reduce using rule 41 (factor -> NOT factor .)
+    LESS_EQ         reduce using rule 41 (factor -> NOT factor .)
+    GREATER         reduce using rule 41 (factor -> NOT factor .)
+    GREATER_EQ      reduce using rule 41 (factor -> NOT factor .)
+    EQTO            reduce using rule 41 (factor -> NOT factor .)
+    END_STATE       reduce using rule 41 (factor -> NOT factor .)
+    FECHA_COLCH     reduce using rule 41 (factor -> NOT factor .)
+    FECHA_PAREN     reduce using rule 41 (factor -> NOT factor .)
+    VIRG            reduce using rule 41 (factor -> NOT factor .)
+
+
+state 61
+
+    (42) factor -> ABRE_PAREN relexpr . FECHA_PAREN
+    (24) relexpr -> relexpr . LESS expr
+    (25) relexpr -> relexpr . LESS_EQ expr
+    (26) relexpr -> relexpr . GREATER expr
+    (27) relexpr -> relexpr . GREATER_EQ expr
+    (28) relexpr -> relexpr . EQTO expr
+
+    FECHA_PAREN     shift and go to state 85
+    LESS            shift and go to state 46
+    LESS_EQ         shift and go to state 47
+    GREATER         shift and go to state 48
+    GREATER_EQ      shift and go to state 49
+    EQTO            shift and go to state 50
+
+
+state 62
+
+    (43) factor -> ASP TEXT . ASP
+
+    ASP             shift and go to state 86
+
+
+state 63
+
+    (46) factor -> READ ABRE_COLCH . FECHA_COLCH
+
+    FECHA_COLCH     shift and go to state 87
+
+
+state 64
+
+    (18) statement -> SHOW expression END_STATE .
+
+    IF              reduce using rule 18 (statement -> SHOW expression END_STATE .)
+    WHILE           reduce using rule 18 (statement -> SHOW expression END_STATE .)
+    RETURN          reduce using rule 18 (statement -> SHOW expression END_STATE .)
+    END_STATE       reduce using rule 18 (statement -> SHOW expression END_STATE .)
+    SHOW            reduce using rule 18 (statement -> SHOW expression END_STATE .)
+    VAR             reduce using rule 18 (statement -> SHOW expression END_STATE .)
+    START_PROG      reduce using rule 18 (statement -> SHOW expression END_STATE .)
+    ABRE_STATE      reduce using rule 18 (statement -> SHOW expression END_STATE .)
+    BLOCK           reduce using rule 18 (statement -> SHOW expression END_STATE .)
+    TEXT            reduce using rule 18 (statement -> SHOW expression END_STATE .)
+    END_PROG        reduce using rule 18 (statement -> SHOW expression END_STATE .)
+    FECHA_STATE     reduce using rule 18 (statement -> SHOW expression END_STATE .)
+
+
+state 65
+
+    (19) statement -> VAR EQUAL expression . END_STATE
+
+    END_STATE       shift and go to state 88
+
+
+state 66
+
+    (2) function -> BLOCK TEXT ABRE_COLCH . declarator upper_statement
+    (4) declarator -> . VAR FECHA_COLCH
+    (5) declarator -> . FECHA_COLCH
+    (6) declarator -> . VAR VIRG declarator
+    (7) declarator -> . expression FECHA_COLCH
+    (8) declarator -> . expression VIRG FECHA_COLCH
+    (22) expression -> . relexpr
+    (23) relexpr -> . expr
+    (24) relexpr -> . relexpr LESS expr
+    (25) relexpr -> . relexpr LESS_EQ expr
+    (26) relexpr -> . relexpr GREATER expr
+    (27) relexpr -> . relexpr GREATER_EQ expr
+    (28) relexpr -> . relexpr EQTO expr
+    (29) expr -> . term
+    (30) expr -> . expr MAIS term
+    (31) expr -> . expr MENOS term
+    (32) expr -> . expr OR term
+    (33) expr -> . expr CONCAT term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    VAR             shift and go to state 68
+    FECHA_COLCH     shift and go to state 69
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    declarator                     shift and go to state 89
+    expression                     shift and go to state 70
+    relexpr                        shift and go to state 23
+    expr                           shift and go to state 24
+    term                           shift and go to state 25
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 67
+
+    (3) function_call -> TEXT ABRE_COLCH declarator .
+
+    END_STATE       reduce using rule 3 (function_call -> TEXT ABRE_COLCH declarator .)
+    VEZES           reduce using rule 3 (function_call -> TEXT ABRE_COLCH declarator .)
+    DIVIDE          reduce using rule 3 (function_call -> TEXT ABRE_COLCH declarator .)
+    AND             reduce using rule 3 (function_call -> TEXT ABRE_COLCH declarator .)
+    MAIS            reduce using rule 3 (function_call -> TEXT ABRE_COLCH declarator .)
+    MENOS           reduce using rule 3 (function_call -> TEXT ABRE_COLCH declarator .)
+    OR              reduce using rule 3 (function_call -> TEXT ABRE_COLCH declarator .)
+    CONCAT          reduce using rule 3 (function_call -> TEXT ABRE_COLCH declarator .)
+    LESS            reduce using rule 3 (function_call -> TEXT ABRE_COLCH declarator .)
+    LESS_EQ         reduce using rule 3 (function_call -> TEXT ABRE_COLCH declarator .)
+    GREATER         reduce using rule 3 (function_call -> TEXT ABRE_COLCH declarator .)
+    GREATER_EQ      reduce using rule 3 (function_call -> TEXT ABRE_COLCH declarator .)
+    EQTO            reduce using rule 3 (function_call -> TEXT ABRE_COLCH declarator .)
+    FECHA_COLCH     reduce using rule 3 (function_call -> TEXT ABRE_COLCH declarator .)
+    FECHA_PAREN     reduce using rule 3 (function_call -> TEXT ABRE_COLCH declarator .)
+    VIRG            reduce using rule 3 (function_call -> TEXT ABRE_COLCH declarator .)
+
+
+state 68
+
+    (4) declarator -> VAR . FECHA_COLCH
+    (6) declarator -> VAR . VIRG declarator
+
+    FECHA_COLCH     shift and go to state 90
+    VIRG            shift and go to state 91
+
+
+state 69
+
+    (5) declarator -> FECHA_COLCH .
+
+    END_STATE       reduce using rule 5 (declarator -> FECHA_COLCH .)
+    VEZES           reduce using rule 5 (declarator -> FECHA_COLCH .)
+    DIVIDE          reduce using rule 5 (declarator -> FECHA_COLCH .)
+    AND             reduce using rule 5 (declarator -> FECHA_COLCH .)
+    MAIS            reduce using rule 5 (declarator -> FECHA_COLCH .)
+    MENOS           reduce using rule 5 (declarator -> FECHA_COLCH .)
+    OR              reduce using rule 5 (declarator -> FECHA_COLCH .)
+    CONCAT          reduce using rule 5 (declarator -> FECHA_COLCH .)
+    LESS            reduce using rule 5 (declarator -> FECHA_COLCH .)
+    LESS_EQ         reduce using rule 5 (declarator -> FECHA_COLCH .)
+    GREATER         reduce using rule 5 (declarator -> FECHA_COLCH .)
+    GREATER_EQ      reduce using rule 5 (declarator -> FECHA_COLCH .)
+    EQTO            reduce using rule 5 (declarator -> FECHA_COLCH .)
+    FECHA_COLCH     reduce using rule 5 (declarator -> FECHA_COLCH .)
+    FECHA_PAREN     reduce using rule 5 (declarator -> FECHA_COLCH .)
+    VIRG            reduce using rule 5 (declarator -> FECHA_COLCH .)
+    START_PROG      reduce using rule 5 (declarator -> FECHA_COLCH .)
+    ABRE_STATE      reduce using rule 5 (declarator -> FECHA_COLCH .)
+
+
+state 70
+
+    (7) declarator -> expression . FECHA_COLCH
+    (8) declarator -> expression . VIRG FECHA_COLCH
+
+    FECHA_COLCH     shift and go to state 92
+    VIRG            shift and go to state 93
+
+
+state 71
+
+    (12) statement -> IF ABRE_COLCH expression FECHA_COLCH . upper_statement
+    (13) statement -> IF ABRE_COLCH expression FECHA_COLCH . upper_statement ELSE upper_statement
+    (1) upper_statement -> . START_PROG middle_statement END_PROG
+    (9) upper_statement -> . ABRE_STATE middle_statement FECHA_STATE
+
+    START_PROG      shift and go to state 2
+    ABRE_STATE      shift and go to state 3
+
+    upper_statement                shift and go to state 94
+
+state 72
+
+    (14) statement -> WHILE ABRE_COLCH expression FECHA_COLCH . upper_statement
+    (1) upper_statement -> . START_PROG middle_statement END_PROG
+    (9) upper_statement -> . ABRE_STATE middle_statement FECHA_STATE
+
+    START_PROG      shift and go to state 2
+    ABRE_STATE      shift and go to state 3
+
+    upper_statement                shift and go to state 95
+
+state 73
+
+    (24) relexpr -> relexpr LESS expr .
+    (30) expr -> expr . MAIS term
+    (31) expr -> expr . MENOS term
+    (32) expr -> expr . OR term
+    (33) expr -> expr . CONCAT term
+
+    LESS            reduce using rule 24 (relexpr -> relexpr LESS expr .)
+    LESS_EQ         reduce using rule 24 (relexpr -> relexpr LESS expr .)
+    GREATER         reduce using rule 24 (relexpr -> relexpr LESS expr .)
+    GREATER_EQ      reduce using rule 24 (relexpr -> relexpr LESS expr .)
+    EQTO            reduce using rule 24 (relexpr -> relexpr LESS expr .)
+    END_STATE       reduce using rule 24 (relexpr -> relexpr LESS expr .)
+    FECHA_COLCH     reduce using rule 24 (relexpr -> relexpr LESS expr .)
+    FECHA_PAREN     reduce using rule 24 (relexpr -> relexpr LESS expr .)
+    VIRG            reduce using rule 24 (relexpr -> relexpr LESS expr .)
+    MAIS            shift and go to state 51
+    MENOS           shift and go to state 52
+    OR              shift and go to state 53
+    CONCAT          shift and go to state 54
+
+
+state 74
+
+    (25) relexpr -> relexpr LESS_EQ expr .
+    (30) expr -> expr . MAIS term
+    (31) expr -> expr . MENOS term
+    (32) expr -> expr . OR term
+    (33) expr -> expr . CONCAT term
+
+    LESS            reduce using rule 25 (relexpr -> relexpr LESS_EQ expr .)
+    LESS_EQ         reduce using rule 25 (relexpr -> relexpr LESS_EQ expr .)
+    GREATER         reduce using rule 25 (relexpr -> relexpr LESS_EQ expr .)
+    GREATER_EQ      reduce using rule 25 (relexpr -> relexpr LESS_EQ expr .)
+    EQTO            reduce using rule 25 (relexpr -> relexpr LESS_EQ expr .)
+    END_STATE       reduce using rule 25 (relexpr -> relexpr LESS_EQ expr .)
+    FECHA_COLCH     reduce using rule 25 (relexpr -> relexpr LESS_EQ expr .)
+    FECHA_PAREN     reduce using rule 25 (relexpr -> relexpr LESS_EQ expr .)
+    VIRG            reduce using rule 25 (relexpr -> relexpr LESS_EQ expr .)
+    MAIS            shift and go to state 51
+    MENOS           shift and go to state 52
+    OR              shift and go to state 53
+    CONCAT          shift and go to state 54
+
+
+state 75
+
+    (26) relexpr -> relexpr GREATER expr .
+    (30) expr -> expr . MAIS term
+    (31) expr -> expr . MENOS term
+    (32) expr -> expr . OR term
+    (33) expr -> expr . CONCAT term
+
+    LESS            reduce using rule 26 (relexpr -> relexpr GREATER expr .)
+    LESS_EQ         reduce using rule 26 (relexpr -> relexpr GREATER expr .)
+    GREATER         reduce using rule 26 (relexpr -> relexpr GREATER expr .)
+    GREATER_EQ      reduce using rule 26 (relexpr -> relexpr GREATER expr .)
+    EQTO            reduce using rule 26 (relexpr -> relexpr GREATER expr .)
+    END_STATE       reduce using rule 26 (relexpr -> relexpr GREATER expr .)
+    FECHA_COLCH     reduce using rule 26 (relexpr -> relexpr GREATER expr .)
+    FECHA_PAREN     reduce using rule 26 (relexpr -> relexpr GREATER expr .)
+    VIRG            reduce using rule 26 (relexpr -> relexpr GREATER expr .)
+    MAIS            shift and go to state 51
+    MENOS           shift and go to state 52
+    OR              shift and go to state 53
+    CONCAT          shift and go to state 54
+
+
+state 76
+
+    (27) relexpr -> relexpr GREATER_EQ expr .
+    (30) expr -> expr . MAIS term
+    (31) expr -> expr . MENOS term
+    (32) expr -> expr . OR term
+    (33) expr -> expr . CONCAT term
+
+    LESS            reduce using rule 27 (relexpr -> relexpr GREATER_EQ expr .)
+    LESS_EQ         reduce using rule 27 (relexpr -> relexpr GREATER_EQ expr .)
+    GREATER         reduce using rule 27 (relexpr -> relexpr GREATER_EQ expr .)
+    GREATER_EQ      reduce using rule 27 (relexpr -> relexpr GREATER_EQ expr .)
+    EQTO            reduce using rule 27 (relexpr -> relexpr GREATER_EQ expr .)
+    END_STATE       reduce using rule 27 (relexpr -> relexpr GREATER_EQ expr .)
+    FECHA_COLCH     reduce using rule 27 (relexpr -> relexpr GREATER_EQ expr .)
+    FECHA_PAREN     reduce using rule 27 (relexpr -> relexpr GREATER_EQ expr .)
+    VIRG            reduce using rule 27 (relexpr -> relexpr GREATER_EQ expr .)
+    MAIS            shift and go to state 51
+    MENOS           shift and go to state 52
+    OR              shift and go to state 53
+    CONCAT          shift and go to state 54
+
+
+state 77
+
+    (28) relexpr -> relexpr EQTO expr .
+    (30) expr -> expr . MAIS term
+    (31) expr -> expr . MENOS term
+    (32) expr -> expr . OR term
+    (33) expr -> expr . CONCAT term
+
+    LESS            reduce using rule 28 (relexpr -> relexpr EQTO expr .)
+    LESS_EQ         reduce using rule 28 (relexpr -> relexpr EQTO expr .)
+    GREATER         reduce using rule 28 (relexpr -> relexpr EQTO expr .)
+    GREATER_EQ      reduce using rule 28 (relexpr -> relexpr EQTO expr .)
+    EQTO            reduce using rule 28 (relexpr -> relexpr EQTO expr .)
+    END_STATE       reduce using rule 28 (relexpr -> relexpr EQTO expr .)
+    FECHA_COLCH     reduce using rule 28 (relexpr -> relexpr EQTO expr .)
+    FECHA_PAREN     reduce using rule 28 (relexpr -> relexpr EQTO expr .)
+    VIRG            reduce using rule 28 (relexpr -> relexpr EQTO expr .)
+    MAIS            shift and go to state 51
+    MENOS           shift and go to state 52
+    OR              shift and go to state 53
+    CONCAT          shift and go to state 54
+
+
+state 78
+
+    (30) expr -> expr MAIS term .
+    (35) term -> term . VEZES factor
+    (36) term -> term . DIVIDE factor
+    (37) term -> term . AND factor
+
+    MAIS            reduce using rule 30 (expr -> expr MAIS term .)
+    MENOS           reduce using rule 30 (expr -> expr MAIS term .)
+    OR              reduce using rule 30 (expr -> expr MAIS term .)
+    CONCAT          reduce using rule 30 (expr -> expr MAIS term .)
+    LESS            reduce using rule 30 (expr -> expr MAIS term .)
+    LESS_EQ         reduce using rule 30 (expr -> expr MAIS term .)
+    GREATER         reduce using rule 30 (expr -> expr MAIS term .)
+    GREATER_EQ      reduce using rule 30 (expr -> expr MAIS term .)
+    EQTO            reduce using rule 30 (expr -> expr MAIS term .)
+    END_STATE       reduce using rule 30 (expr -> expr MAIS term .)
+    FECHA_COLCH     reduce using rule 30 (expr -> expr MAIS term .)
+    FECHA_PAREN     reduce using rule 30 (expr -> expr MAIS term .)
+    VIRG            reduce using rule 30 (expr -> expr MAIS term .)
+    VEZES           shift and go to state 55
+    DIVIDE          shift and go to state 56
+    AND             shift and go to state 57
+
+
+state 79
+
+    (31) expr -> expr MENOS term .
+    (35) term -> term . VEZES factor
+    (36) term -> term . DIVIDE factor
+    (37) term -> term . AND factor
+
+    MAIS            reduce using rule 31 (expr -> expr MENOS term .)
+    MENOS           reduce using rule 31 (expr -> expr MENOS term .)
+    OR              reduce using rule 31 (expr -> expr MENOS term .)
+    CONCAT          reduce using rule 31 (expr -> expr MENOS term .)
+    LESS            reduce using rule 31 (expr -> expr MENOS term .)
+    LESS_EQ         reduce using rule 31 (expr -> expr MENOS term .)
+    GREATER         reduce using rule 31 (expr -> expr MENOS term .)
+    GREATER_EQ      reduce using rule 31 (expr -> expr MENOS term .)
+    EQTO            reduce using rule 31 (expr -> expr MENOS term .)
+    END_STATE       reduce using rule 31 (expr -> expr MENOS term .)
+    FECHA_COLCH     reduce using rule 31 (expr -> expr MENOS term .)
+    FECHA_PAREN     reduce using rule 31 (expr -> expr MENOS term .)
+    VIRG            reduce using rule 31 (expr -> expr MENOS term .)
+    VEZES           shift and go to state 55
+    DIVIDE          shift and go to state 56
+    AND             shift and go to state 57
+
+
+state 80
+
+    (32) expr -> expr OR term .
+    (35) term -> term . VEZES factor
+    (36) term -> term . DIVIDE factor
+    (37) term -> term . AND factor
+
+    MAIS            reduce using rule 32 (expr -> expr OR term .)
+    MENOS           reduce using rule 32 (expr -> expr OR term .)
+    OR              reduce using rule 32 (expr -> expr OR term .)
+    CONCAT          reduce using rule 32 (expr -> expr OR term .)
+    LESS            reduce using rule 32 (expr -> expr OR term .)
+    LESS_EQ         reduce using rule 32 (expr -> expr OR term .)
+    GREATER         reduce using rule 32 (expr -> expr OR term .)
+    GREATER_EQ      reduce using rule 32 (expr -> expr OR term .)
+    EQTO            reduce using rule 32 (expr -> expr OR term .)
+    END_STATE       reduce using rule 32 (expr -> expr OR term .)
+    FECHA_COLCH     reduce using rule 32 (expr -> expr OR term .)
+    FECHA_PAREN     reduce using rule 32 (expr -> expr OR term .)
+    VIRG            reduce using rule 32 (expr -> expr OR term .)
+    VEZES           shift and go to state 55
+    DIVIDE          shift and go to state 56
+    AND             shift and go to state 57
+
+
+state 81
+
+    (33) expr -> expr CONCAT term .
+    (35) term -> term . VEZES factor
+    (36) term -> term . DIVIDE factor
+    (37) term -> term . AND factor
+
+    MAIS            reduce using rule 33 (expr -> expr CONCAT term .)
+    MENOS           reduce using rule 33 (expr -> expr CONCAT term .)
+    OR              reduce using rule 33 (expr -> expr CONCAT term .)
+    CONCAT          reduce using rule 33 (expr -> expr CONCAT term .)
+    LESS            reduce using rule 33 (expr -> expr CONCAT term .)
+    LESS_EQ         reduce using rule 33 (expr -> expr CONCAT term .)
+    GREATER         reduce using rule 33 (expr -> expr CONCAT term .)
+    GREATER_EQ      reduce using rule 33 (expr -> expr CONCAT term .)
+    EQTO            reduce using rule 33 (expr -> expr CONCAT term .)
+    END_STATE       reduce using rule 33 (expr -> expr CONCAT term .)
+    FECHA_COLCH     reduce using rule 33 (expr -> expr CONCAT term .)
+    FECHA_PAREN     reduce using rule 33 (expr -> expr CONCAT term .)
+    VIRG            reduce using rule 33 (expr -> expr CONCAT term .)
+    VEZES           shift and go to state 55
+    DIVIDE          shift and go to state 56
+    AND             shift and go to state 57
+
+
+state 82
+
+    (35) term -> term VEZES factor .
+
+    VEZES           reduce using rule 35 (term -> term VEZES factor .)
+    DIVIDE          reduce using rule 35 (term -> term VEZES factor .)
+    AND             reduce using rule 35 (term -> term VEZES factor .)
+    MAIS            reduce using rule 35 (term -> term VEZES factor .)
+    MENOS           reduce using rule 35 (term -> term VEZES factor .)
+    OR              reduce using rule 35 (term -> term VEZES factor .)
+    CONCAT          reduce using rule 35 (term -> term VEZES factor .)
+    LESS            reduce using rule 35 (term -> term VEZES factor .)
+    LESS_EQ         reduce using rule 35 (term -> term VEZES factor .)
+    GREATER         reduce using rule 35 (term -> term VEZES factor .)
+    GREATER_EQ      reduce using rule 35 (term -> term VEZES factor .)
+    EQTO            reduce using rule 35 (term -> term VEZES factor .)
+    END_STATE       reduce using rule 35 (term -> term VEZES factor .)
+    FECHA_COLCH     reduce using rule 35 (term -> term VEZES factor .)
+    FECHA_PAREN     reduce using rule 35 (term -> term VEZES factor .)
+    VIRG            reduce using rule 35 (term -> term VEZES factor .)
+
+
+state 83
+
+    (36) term -> term DIVIDE factor .
+
+    VEZES           reduce using rule 36 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 36 (term -> term DIVIDE factor .)
+    AND             reduce using rule 36 (term -> term DIVIDE factor .)
+    MAIS            reduce using rule 36 (term -> term DIVIDE factor .)
+    MENOS           reduce using rule 36 (term -> term DIVIDE factor .)
+    OR              reduce using rule 36 (term -> term DIVIDE factor .)
+    CONCAT          reduce using rule 36 (term -> term DIVIDE factor .)
+    LESS            reduce using rule 36 (term -> term DIVIDE factor .)
+    LESS_EQ         reduce using rule 36 (term -> term DIVIDE factor .)
+    GREATER         reduce using rule 36 (term -> term DIVIDE factor .)
+    GREATER_EQ      reduce using rule 36 (term -> term DIVIDE factor .)
+    EQTO            reduce using rule 36 (term -> term DIVIDE factor .)
+    END_STATE       reduce using rule 36 (term -> term DIVIDE factor .)
+    FECHA_COLCH     reduce using rule 36 (term -> term DIVIDE factor .)
+    FECHA_PAREN     reduce using rule 36 (term -> term DIVIDE factor .)
+    VIRG            reduce using rule 36 (term -> term DIVIDE factor .)
+
+
+state 84
+
+    (37) term -> term AND factor .
+
+    VEZES           reduce using rule 37 (term -> term AND factor .)
+    DIVIDE          reduce using rule 37 (term -> term AND factor .)
+    AND             reduce using rule 37 (term -> term AND factor .)
+    MAIS            reduce using rule 37 (term -> term AND factor .)
+    MENOS           reduce using rule 37 (term -> term AND factor .)
+    OR              reduce using rule 37 (term -> term AND factor .)
+    CONCAT          reduce using rule 37 (term -> term AND factor .)
+    LESS            reduce using rule 37 (term -> term AND factor .)
+    LESS_EQ         reduce using rule 37 (term -> term AND factor .)
+    GREATER         reduce using rule 37 (term -> term AND factor .)
+    GREATER_EQ      reduce using rule 37 (term -> term AND factor .)
+    EQTO            reduce using rule 37 (term -> term AND factor .)
+    END_STATE       reduce using rule 37 (term -> term AND factor .)
+    FECHA_COLCH     reduce using rule 37 (term -> term AND factor .)
+    FECHA_PAREN     reduce using rule 37 (term -> term AND factor .)
+    VIRG            reduce using rule 37 (term -> term AND factor .)
+
+
+state 85
+
+    (42) factor -> ABRE_PAREN relexpr FECHA_PAREN .
+
+    VEZES           reduce using rule 42 (factor -> ABRE_PAREN relexpr FECHA_PAREN .)
+    DIVIDE          reduce using rule 42 (factor -> ABRE_PAREN relexpr FECHA_PAREN .)
+    AND             reduce using rule 42 (factor -> ABRE_PAREN relexpr FECHA_PAREN .)
+    MAIS            reduce using rule 42 (factor -> ABRE_PAREN relexpr FECHA_PAREN .)
+    MENOS           reduce using rule 42 (factor -> ABRE_PAREN relexpr FECHA_PAREN .)
+    OR              reduce using rule 42 (factor -> ABRE_PAREN relexpr FECHA_PAREN .)
+    CONCAT          reduce using rule 42 (factor -> ABRE_PAREN relexpr FECHA_PAREN .)
+    LESS            reduce using rule 42 (factor -> ABRE_PAREN relexpr FECHA_PAREN .)
+    LESS_EQ         reduce using rule 42 (factor -> ABRE_PAREN relexpr FECHA_PAREN .)
+    GREATER         reduce using rule 42 (factor -> ABRE_PAREN relexpr FECHA_PAREN .)
+    GREATER_EQ      reduce using rule 42 (factor -> ABRE_PAREN relexpr FECHA_PAREN .)
+    EQTO            reduce using rule 42 (factor -> ABRE_PAREN relexpr FECHA_PAREN .)
+    END_STATE       reduce using rule 42 (factor -> ABRE_PAREN relexpr FECHA_PAREN .)
+    FECHA_COLCH     reduce using rule 42 (factor -> ABRE_PAREN relexpr FECHA_PAREN .)
+    FECHA_PAREN     reduce using rule 42 (factor -> ABRE_PAREN relexpr FECHA_PAREN .)
+    VIRG            reduce using rule 42 (factor -> ABRE_PAREN relexpr FECHA_PAREN .)
+
+
+state 86
+
+    (43) factor -> ASP TEXT ASP .
+
+    VEZES           reduce using rule 43 (factor -> ASP TEXT ASP .)
+    DIVIDE          reduce using rule 43 (factor -> ASP TEXT ASP .)
+    AND             reduce using rule 43 (factor -> ASP TEXT ASP .)
+    MAIS            reduce using rule 43 (factor -> ASP TEXT ASP .)
+    MENOS           reduce using rule 43 (factor -> ASP TEXT ASP .)
+    OR              reduce using rule 43 (factor -> ASP TEXT ASP .)
+    CONCAT          reduce using rule 43 (factor -> ASP TEXT ASP .)
+    LESS            reduce using rule 43 (factor -> ASP TEXT ASP .)
+    LESS_EQ         reduce using rule 43 (factor -> ASP TEXT ASP .)
+    GREATER         reduce using rule 43 (factor -> ASP TEXT ASP .)
+    GREATER_EQ      reduce using rule 43 (factor -> ASP TEXT ASP .)
+    EQTO            reduce using rule 43 (factor -> ASP TEXT ASP .)
+    END_STATE       reduce using rule 43 (factor -> ASP TEXT ASP .)
+    FECHA_COLCH     reduce using rule 43 (factor -> ASP TEXT ASP .)
+    FECHA_PAREN     reduce using rule 43 (factor -> ASP TEXT ASP .)
+    VIRG            reduce using rule 43 (factor -> ASP TEXT ASP .)
+
+
+state 87
+
+    (46) factor -> READ ABRE_COLCH FECHA_COLCH .
+
+    VEZES           reduce using rule 46 (factor -> READ ABRE_COLCH FECHA_COLCH .)
+    DIVIDE          reduce using rule 46 (factor -> READ ABRE_COLCH FECHA_COLCH .)
+    AND             reduce using rule 46 (factor -> READ ABRE_COLCH FECHA_COLCH .)
+    MAIS            reduce using rule 46 (factor -> READ ABRE_COLCH FECHA_COLCH .)
+    MENOS           reduce using rule 46 (factor -> READ ABRE_COLCH FECHA_COLCH .)
+    OR              reduce using rule 46 (factor -> READ ABRE_COLCH FECHA_COLCH .)
+    CONCAT          reduce using rule 46 (factor -> READ ABRE_COLCH FECHA_COLCH .)
+    LESS            reduce using rule 46 (factor -> READ ABRE_COLCH FECHA_COLCH .)
+    LESS_EQ         reduce using rule 46 (factor -> READ ABRE_COLCH FECHA_COLCH .)
+    GREATER         reduce using rule 46 (factor -> READ ABRE_COLCH FECHA_COLCH .)
+    GREATER_EQ      reduce using rule 46 (factor -> READ ABRE_COLCH FECHA_COLCH .)
+    EQTO            reduce using rule 46 (factor -> READ ABRE_COLCH FECHA_COLCH .)
+    END_STATE       reduce using rule 46 (factor -> READ ABRE_COLCH FECHA_COLCH .)
+    FECHA_COLCH     reduce using rule 46 (factor -> READ ABRE_COLCH FECHA_COLCH .)
+    FECHA_PAREN     reduce using rule 46 (factor -> READ ABRE_COLCH FECHA_COLCH .)
+    VIRG            reduce using rule 46 (factor -> READ ABRE_COLCH FECHA_COLCH .)
+
+
+state 88
+
+    (19) statement -> VAR EQUAL expression END_STATE .
+
+    IF              reduce using rule 19 (statement -> VAR EQUAL expression END_STATE .)
+    WHILE           reduce using rule 19 (statement -> VAR EQUAL expression END_STATE .)
+    RETURN          reduce using rule 19 (statement -> VAR EQUAL expression END_STATE .)
+    END_STATE       reduce using rule 19 (statement -> VAR EQUAL expression END_STATE .)
+    SHOW            reduce using rule 19 (statement -> VAR EQUAL expression END_STATE .)
+    VAR             reduce using rule 19 (statement -> VAR EQUAL expression END_STATE .)
+    START_PROG      reduce using rule 19 (statement -> VAR EQUAL expression END_STATE .)
+    ABRE_STATE      reduce using rule 19 (statement -> VAR EQUAL expression END_STATE .)
+    BLOCK           reduce using rule 19 (statement -> VAR EQUAL expression END_STATE .)
+    TEXT            reduce using rule 19 (statement -> VAR EQUAL expression END_STATE .)
+    END_PROG        reduce using rule 19 (statement -> VAR EQUAL expression END_STATE .)
+    FECHA_STATE     reduce using rule 19 (statement -> VAR EQUAL expression END_STATE .)
+
+
+state 89
+
+    (2) function -> BLOCK TEXT ABRE_COLCH declarator . upper_statement
+    (1) upper_statement -> . START_PROG middle_statement END_PROG
+    (9) upper_statement -> . ABRE_STATE middle_statement FECHA_STATE
+
+    START_PROG      shift and go to state 2
+    ABRE_STATE      shift and go to state 3
+
+    upper_statement                shift and go to state 96
+
+state 90
+
+    (4) declarator -> VAR FECHA_COLCH .
+
+    END_STATE       reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+    VEZES           reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+    DIVIDE          reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+    AND             reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+    MAIS            reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+    MENOS           reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+    OR              reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+    CONCAT          reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+    LESS            reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+    LESS_EQ         reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+    GREATER         reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+    GREATER_EQ      reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+    EQTO            reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+    FECHA_COLCH     reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+    FECHA_PAREN     reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+    VIRG            reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+    START_PROG      reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+    ABRE_STATE      reduce using rule 4 (declarator -> VAR FECHA_COLCH .)
+
+
+state 91
+
+    (6) declarator -> VAR VIRG . declarator
+    (4) declarator -> . VAR FECHA_COLCH
+    (5) declarator -> . FECHA_COLCH
+    (6) declarator -> . VAR VIRG declarator
+    (7) declarator -> . expression FECHA_COLCH
+    (8) declarator -> . expression VIRG FECHA_COLCH
+    (22) expression -> . relexpr
+    (23) relexpr -> . expr
+    (24) relexpr -> . relexpr LESS expr
+    (25) relexpr -> . relexpr LESS_EQ expr
+    (26) relexpr -> . relexpr GREATER expr
+    (27) relexpr -> . relexpr GREATER_EQ expr
+    (28) relexpr -> . relexpr EQTO expr
+    (29) expr -> . term
+    (30) expr -> . expr MAIS term
+    (31) expr -> . expr MENOS term
+    (32) expr -> . expr OR term
+    (33) expr -> . expr CONCAT term
+    (34) term -> . factor
+    (35) term -> . term VEZES factor
+    (36) term -> . term DIVIDE factor
+    (37) term -> . term AND factor
+    (38) factor -> . INTEGER
+    (39) factor -> . MAIS factor
+    (40) factor -> . MENOS factor
+    (41) factor -> . NOT factor
+    (42) factor -> . ABRE_PAREN relexpr FECHA_PAREN
+    (43) factor -> . ASP TEXT ASP
+    (44) factor -> . TRUE
+    (45) factor -> . FALSE
+    (46) factor -> . READ ABRE_COLCH FECHA_COLCH
+    (47) factor -> . function_call
+    (3) function_call -> . TEXT ABRE_COLCH declarator
+
+    VAR             shift and go to state 68
+    FECHA_COLCH     shift and go to state 69
+    INTEGER         shift and go to state 29
+    MAIS            shift and go to state 26
+    MENOS           shift and go to state 27
+    NOT             shift and go to state 30
+    ABRE_PAREN      shift and go to state 31
+    ASP             shift and go to state 32
+    TRUE            shift and go to state 33
+    FALSE           shift and go to state 34
+    READ            shift and go to state 35
+    TEXT            shift and go to state 16
+
+    declarator                     shift and go to state 97
+    expression                     shift and go to state 70
+    relexpr                        shift and go to state 23
+    expr                           shift and go to state 24
+    term                           shift and go to state 25
+    factor                         shift and go to state 28
+    function_call                  shift and go to state 36
+
+state 92
+
+    (7) declarator -> expression FECHA_COLCH .
+
+    END_STATE       reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+    VEZES           reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+    DIVIDE          reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+    AND             reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+    MAIS            reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+    MENOS           reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+    OR              reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+    CONCAT          reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+    LESS            reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+    LESS_EQ         reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+    GREATER         reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+    GREATER_EQ      reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+    EQTO            reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+    FECHA_COLCH     reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+    FECHA_PAREN     reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+    VIRG            reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+    START_PROG      reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+    ABRE_STATE      reduce using rule 7 (declarator -> expression FECHA_COLCH .)
+
+
+state 93
+
+    (8) declarator -> expression VIRG . FECHA_COLCH
+
+    FECHA_COLCH     shift and go to state 98
+
+
+state 94
+
+    (12) statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement .
+    (13) statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement . ELSE upper_statement
+
+    IF              reduce using rule 12 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    WHILE           reduce using rule 12 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    RETURN          reduce using rule 12 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    END_STATE       reduce using rule 12 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    SHOW            reduce using rule 12 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    VAR             reduce using rule 12 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    START_PROG      reduce using rule 12 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    ABRE_STATE      reduce using rule 12 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    BLOCK           reduce using rule 12 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    TEXT            reduce using rule 12 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    END_PROG        reduce using rule 12 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    FECHA_STATE     reduce using rule 12 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    ELSE            shift and go to state 99
+
+
+state 95
+
+    (14) statement -> WHILE ABRE_COLCH expression FECHA_COLCH upper_statement .
+
+    IF              reduce using rule 14 (statement -> WHILE ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    WHILE           reduce using rule 14 (statement -> WHILE ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    RETURN          reduce using rule 14 (statement -> WHILE ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    END_STATE       reduce using rule 14 (statement -> WHILE ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    SHOW            reduce using rule 14 (statement -> WHILE ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    VAR             reduce using rule 14 (statement -> WHILE ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    START_PROG      reduce using rule 14 (statement -> WHILE ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    ABRE_STATE      reduce using rule 14 (statement -> WHILE ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    BLOCK           reduce using rule 14 (statement -> WHILE ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    TEXT            reduce using rule 14 (statement -> WHILE ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    END_PROG        reduce using rule 14 (statement -> WHILE ABRE_COLCH expression FECHA_COLCH upper_statement .)
+    FECHA_STATE     reduce using rule 14 (statement -> WHILE ABRE_COLCH expression FECHA_COLCH upper_statement .)
+
+
+state 96
+
+    (2) function -> BLOCK TEXT ABRE_COLCH declarator upper_statement .
+
+    IF              reduce using rule 2 (function -> BLOCK TEXT ABRE_COLCH declarator upper_statement .)
+    WHILE           reduce using rule 2 (function -> BLOCK TEXT ABRE_COLCH declarator upper_statement .)
+    RETURN          reduce using rule 2 (function -> BLOCK TEXT ABRE_COLCH declarator upper_statement .)
+    END_STATE       reduce using rule 2 (function -> BLOCK TEXT ABRE_COLCH declarator upper_statement .)
+    SHOW            reduce using rule 2 (function -> BLOCK TEXT ABRE_COLCH declarator upper_statement .)
+    VAR             reduce using rule 2 (function -> BLOCK TEXT ABRE_COLCH declarator upper_statement .)
+    START_PROG      reduce using rule 2 (function -> BLOCK TEXT ABRE_COLCH declarator upper_statement .)
+    ABRE_STATE      reduce using rule 2 (function -> BLOCK TEXT ABRE_COLCH declarator upper_statement .)
+    BLOCK           reduce using rule 2 (function -> BLOCK TEXT ABRE_COLCH declarator upper_statement .)
+    TEXT            reduce using rule 2 (function -> BLOCK TEXT ABRE_COLCH declarator upper_statement .)
+    END_PROG        reduce using rule 2 (function -> BLOCK TEXT ABRE_COLCH declarator upper_statement .)
+    FECHA_STATE     reduce using rule 2 (function -> BLOCK TEXT ABRE_COLCH declarator upper_statement .)
+
+
+state 97
+
+    (6) declarator -> VAR VIRG declarator .
+
+    END_STATE       reduce using rule 6 (declarator -> VAR VIRG declarator .)
+    VEZES           reduce using rule 6 (declarator -> VAR VIRG declarator .)
+    DIVIDE          reduce using rule 6 (declarator -> VAR VIRG declarator .)
+    AND             reduce using rule 6 (declarator -> VAR VIRG declarator .)
+    MAIS            reduce using rule 6 (declarator -> VAR VIRG declarator .)
+    MENOS           reduce using rule 6 (declarator -> VAR VIRG declarator .)
+    OR              reduce using rule 6 (declarator -> VAR VIRG declarator .)
+    CONCAT          reduce using rule 6 (declarator -> VAR VIRG declarator .)
+    LESS            reduce using rule 6 (declarator -> VAR VIRG declarator .)
+    LESS_EQ         reduce using rule 6 (declarator -> VAR VIRG declarator .)
+    GREATER         reduce using rule 6 (declarator -> VAR VIRG declarator .)
+    GREATER_EQ      reduce using rule 6 (declarator -> VAR VIRG declarator .)
+    EQTO            reduce using rule 6 (declarator -> VAR VIRG declarator .)
+    FECHA_COLCH     reduce using rule 6 (declarator -> VAR VIRG declarator .)
+    FECHA_PAREN     reduce using rule 6 (declarator -> VAR VIRG declarator .)
+    VIRG            reduce using rule 6 (declarator -> VAR VIRG declarator .)
+    START_PROG      reduce using rule 6 (declarator -> VAR VIRG declarator .)
+    ABRE_STATE      reduce using rule 6 (declarator -> VAR VIRG declarator .)
+
+
+state 98
+
+    (8) declarator -> expression VIRG FECHA_COLCH .
+
+    END_STATE       reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+    VEZES           reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+    DIVIDE          reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+    AND             reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+    MAIS            reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+    MENOS           reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+    OR              reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+    CONCAT          reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+    LESS            reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+    LESS_EQ         reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+    GREATER         reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+    GREATER_EQ      reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+    EQTO            reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+    FECHA_COLCH     reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+    FECHA_PAREN     reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+    VIRG            reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+    START_PROG      reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+    ABRE_STATE      reduce using rule 8 (declarator -> expression VIRG FECHA_COLCH .)
+
+
+state 99
+
+    (13) statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE . upper_statement
+    (1) upper_statement -> . START_PROG middle_statement END_PROG
+    (9) upper_statement -> . ABRE_STATE middle_statement FECHA_STATE
+
+    START_PROG      shift and go to state 2
+    ABRE_STATE      shift and go to state 3
+
+    upper_statement                shift and go to state 100
+
+state 100
+
+    (13) statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement .
+
+    IF              reduce using rule 13 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement .)
+    WHILE           reduce using rule 13 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement .)
+    RETURN          reduce using rule 13 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement .)
+    END_STATE       reduce using rule 13 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement .)
+    SHOW            reduce using rule 13 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement .)
+    VAR             reduce using rule 13 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement .)
+    START_PROG      reduce using rule 13 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement .)
+    ABRE_STATE      reduce using rule 13 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement .)
+    BLOCK           reduce using rule 13 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement .)
+    TEXT            reduce using rule 13 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement .)
+    END_PROG        reduce using rule 13 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement .)
+    FECHA_STATE     reduce using rule 13 (statement -> IF ABRE_COLCH expression FECHA_COLCH upper_statement ELSE upper_statement .)
+

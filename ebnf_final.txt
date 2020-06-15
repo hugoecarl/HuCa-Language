@@ -1,0 +1,62 @@
+<digit> ::= "0" | "1" | ... | "9";
+
+<int_num> ::= <digit>, {<digit>};
+
+<letter> ::= "A" | "B" | "C" | "D" | "E" | "F" | "G"
+       | "H" | "I" | "J" | "K" | "L" | "M" | "N"
+       | "O" | "P" | "Q" | "R" | "S" | "T" | "U"
+       | "V" | "W" | "X" | "Y" | "Z" | "a" | ... | "z";
+
+<text> ::= <letter>, {<letter>};
+
+<string> ::= """, <text>, """;
+
+<bool_val> ::= true | false;
+
+<input> ::= "read","<", ">";
+
+<declarator> ::= ("_", <text>)?, (",")?; 
+
+<variable_assign> ::= "_", <text>, "=", <relexp>, "|";
+
+<program_statement> ::= "#INIT" , {<statement>}, "#END";
+
+<compound_statement> ::= "=>", {<statement>}, "<=";
+
+<statement> ::= <iteration_statement> 
+	       | <condition_statement> 
+              | "|" finish statement
+	       | <compound_statement>
+              | "return" <relexp>, "|"
+              | <variable_assign>
+              | <print_statement>
+              | <function_definition>
+              | <function_call>, "|";
+
+<function_definition> ::= "BLOCK", <text>, "<", {<declarator>}, ">", <compound_statement>;
+
+<function_call> ::= <text>, "<", {<declarator> | (relexp, (",")?)}, ">";
+
+<itaration_statement> ::= "@", "<", {<relexp>}, ">", <compound_statement>;
+
+<print_statement> ::= "show", <relexp>, "|";
+
+<condition_statement> ::= "?", "<", {<relexp>}, ">", <compound_statement>, ("?.", <compound_statement>)?;
+
+<relexp> ::= <exp> | <exp>, ("less" | "less_eq" | "greater" | "greater_eq" | "eqto"), <exp>;
+
+<exp> ::= <term>, {("+" | "-" | "or" | "concat"), <term>};
+
+<term> ::= <factor>, {("*" | "/" | "and"), <factor>};
+
+<factor> ::= <int_num> | ("+" | "-" | "not"), <factor> | "(", <exp>, ")" | <bool_val> | <input> | <string> | <function_call>;
+
+
+
+
+
+
+
+ 
+  
+
